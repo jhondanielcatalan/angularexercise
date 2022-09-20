@@ -39,7 +39,7 @@ export const displayList = (locations:Location[]) => {
 
 export const searchCity = (searchKey:string) =>{
     console.log("Searching..."+ searchKey);
-    var searchCity = locations.filter(c => (c.city.indexOf(searchKey)>=0||c.country.indexOf(searchKey)>=0));
+    var searchCity = locations.filter(c => (c.city.toLowerCase().indexOf(searchKey.toLowerCase())>=0||c.country.toLowerCase().indexOf(searchKey.toLowerCase())>=0));
     displayList(searchCity);
 }
 
