@@ -9,7 +9,7 @@ interface Location {
 
 var locations: Location[] = [];
 export const addLocation = (city: string, country: string, population: string) => {
-
+    console.log("\n1. City Directory");
     var location: Location = {
         city: city,
         country: country,
@@ -38,26 +38,11 @@ export const displayList = (locations:Location[]) => {
 }
 
 export const searchCity = (searchKey:string) =>{
-    console.log("Searching..."+ searchKey);
+    console.log("Searching..."+searchKey);
     var searchCity = locations.filter(c => (c.city.toLowerCase().indexOf(searchKey.toLowerCase())>=0||c.country.toLowerCase().indexOf(searchKey.toLowerCase())>=0));
+    
     displayList(searchCity);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const checkISBN = () => {
     let isbn: (string | number)[][] = [[1, 1, 1, 2, 2, 2, 3, 3, 3, 9]];
@@ -122,7 +107,6 @@ const morphString = (param: string) => {
 
 }
 
-
 export const moveZeros = () => {
     console.log("\n4. Moving Zeroes to end");
     let collections = [false, 1, 0, 1, 2, 0, 1, 3, "a",];
@@ -134,8 +118,6 @@ export const moveZeros = () => {
     }
     console.log("From " + first + " -> " + collections);
 }
-
-
 
 
 checkISBN();

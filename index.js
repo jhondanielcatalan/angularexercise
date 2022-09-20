@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.moveZeros = exports.checkISBN = exports.searchCity = exports.displayList = exports.addLocation = void 0;
 var locations = [];
 const addLocation = (city, country, population) => {
+    console.log("\n1. City Directory");
     var location = {
         city: city,
         country: country,
