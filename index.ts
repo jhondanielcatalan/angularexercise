@@ -1,44 +1,47 @@
 
-var locations:Location[] = [];
 
-interface Location
-{
-    city:string,
-    country:string,
-    population:number
+interface Location {
+    city: string,
+    country: string,
+    population: number
 }
 
 
-export const addLocation = (city:string,country:string,population:string) =>{
-    
-    var location:Location = {
-        city:city,
-        country:country,
-        population:+population
+var locations: Location[] = [];
+export const addLocation = (city: string, country: string, population: string) => {
+
+    var location: Location = {
+        city: city,
+        country: country,
+        population: +population
     }
-    console.log(city+" | "+country+" | "+population);
+    console.log(city + " | " + country + " | " + population);
     locations.push(location);
-    displayList();
+    displayList(locations);
 }
 
-export const displayList = () => {
+export const displayList = (locations:Location[]) => {
     let list = document.getElementById('cityList');
-    if(list) {
-        while(list.hasChildNodes() && list.firstChild) {
+    if (list) {
+        while (list.hasChildNodes() && list.firstChild) {
             list.removeChild(list.firstChild)
         }
     }
     locations.forEach((item) => {
-        if(list) {
+        if (list) {
             let li = document.createElement("li");
-            li.innerText = item.city +" , " + item.country + " , " +item.population;
+            li.innerText = item.city + " , " + item.country + " , " + item.population;
             list.appendChild(li);
         }
     })
 
 }
 
-
+export const searchCity = (searchKey:string) =>{
+    console.log("Searching..."+ searchKey);
+    var searchCity = locations.filter(c => (c.city.indexOf(searchKey)>=0||c.country.indexOf(searchKey)>=0));
+    displayList(searchCity);
+}
 
 
 
@@ -57,17 +60,7 @@ export const displayList = () => {
 
 
 export const checkISBN = () => {
-
-    let isbn: (string | number)[][] =
-    [[1, 1, 1, 2, 2, 2, 3, 3, 3, 9],
-    [1, 1, 1, 2, 2, 2, 3, 3, 3, 3],
-    [1, 1, 1, 2, 2, 2, 3, 3, 3, 9, 'X'],
-    [1, 2, 3, 4, 5, 5, 4, 3, 2, 1],
-    [1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
-    [0, 4, 8, 6, 6, 5, 0, 8, 8, 'X'],
-    ['X', 1, 2, 3, 4, 5, 6, 7, 8, 8]
-    ];
-
+    let isbn: (string | number)[][] = [[1, 1, 1, 2, 2, 2, 3, 3, 3, 9]];
     console.log("2. ISBN Validation");
     isbn.forEach((item) => {
         let isValid: boolean = true;
@@ -99,8 +92,6 @@ export const checkISBN = () => {
     })
 }
 
-
-/** */
 let param: string = "Cat30";
 const morphString = (param: string) => {
     console.log("\n3. Change it up!");
@@ -110,10 +101,9 @@ const morphString = (param: string) => {
         var charval = "";
 
         charval = param.charAt(i);
-        if(charval.match(/[Z,z]/g)) charval = "A";
-        else
-        {
-            charval = charval.match(/[A-Z,a-z]/g) ? (String.fromCharCode(param.charCodeAt(i)+1)) : param.charAt(i);
+        if (charval.match(/[Z,z]/g)) charval = "A";
+        else {
+            charval = charval.match(/[A-Z,a-z]/g) ? (String.fromCharCode(param.charCodeAt(i) + 1)) : param.charAt(i);
         }
 
         if (charval.match(/[aeiou]/g)) {
@@ -125,7 +115,7 @@ const morphString = (param: string) => {
         else {
             changed = changed.concat(charval);
         }
-        
+
     }
 
     console.log(param + " -> " + changed);
@@ -135,12 +125,11 @@ const morphString = (param: string) => {
 
 export const moveZeros = () => {
     console.log("\n4. Moving Zeroes to end");
-    let collections = [false, 1, 0, 1, 2, 0, 1, 3, "a"];
+    let collections = [false, 1, 0, 1, 2, 0, 1, 3, "a",];
     let first: string = collections.toString();
     for (let d = collections.length - 1; d >= 0; d--) {
-        if (collections[d] === 0 && collections.splice(d, 1)) 
-        { 
-            collections.push(0); 
+        if (collections[d] === 0 && collections.splice(d, 1)) {
+            collections.push(0);
         }
     }
     console.log("From " + first + " -> " + collections);

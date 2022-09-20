@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.moveZeros = exports.checkISBN = exports.displayList = exports.addLocation = void 0;
+exports.moveZeros = exports.checkISBN = exports.searchCity = exports.displayList = exports.addLocation = void 0;
 var locations = [];
 const addLocation = (city, country, population) => {
     var location = {
@@ -10,10 +10,10 @@ const addLocation = (city, country, population) => {
     };
     console.log(city + " | " + country + " | " + population);
     locations.push(location);
-    (0, exports.displayList)();
+    (0, exports.displayList)(locations);
 };
 exports.addLocation = addLocation;
-const displayList = () => {
+const displayList = (locations) => {
     let list = document.getElementById('cityList');
     if (list) {
         while (list.hasChildNodes() && list.firstChild) {
@@ -29,15 +29,14 @@ const displayList = () => {
     });
 };
 exports.displayList = displayList;
+const searchCity = (searchKey) => {
+    console.log("Searching..." + searchKey);
+    var searchCity = locations.filter(c => (c.city.indexOf(searchKey) >= 0 || c.country.indexOf(searchKey) >= 0));
+    (0, exports.displayList)(searchCity);
+};
+exports.searchCity = searchCity;
 const checkISBN = () => {
-    let isbn = [[1, 1, 1, 2, 2, 2, 3, 3, 3, 9],
-        [1, 1, 1, 2, 2, 2, 3, 3, 3, 3],
-        [1, 1, 1, 2, 2, 2, 3, 3, 3, 9, 'X'],
-        [1, 2, 3, 4, 5, 5, 4, 3, 2, 1],
-        [1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
-        [0, 4, 8, 6, 6, 5, 0, 8, 8, 'X'],
-        ['X', 1, 2, 3, 4, 5, 6, 7, 8, 8]
-    ];
+    let isbn = [[1, 1, 1, 2, 2, 2, 3, 3, 3, 9]];
     console.log("2. ISBN Validation");
     isbn.forEach((item) => {
         let isValid = true;
@@ -68,7 +67,6 @@ const checkISBN = () => {
     });
 };
 exports.checkISBN = checkISBN;
-/** */
 let param = "Cat30";
 const morphString = (param) => {
     console.log("\n3. Change it up!");
@@ -95,7 +93,7 @@ const morphString = (param) => {
 };
 const moveZeros = () => {
     console.log("\n4. Moving Zeroes to end");
-    let collections = [false, 1, 0, 1, 2, 0, 1, 3, "a"];
+    let collections = [false, 1, 0, 1, 2, 0, 1, 3, "a",];
     let first = collections.toString();
     for (let d = collections.length - 1; d >= 0; d--) {
         if (collections[d] === 0 && collections.splice(d, 1)) {
